@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.configuration.typecontainers.MotorConfigu
 /*
  * Constants shared between multiple drive types.
  *
- * TODO: Tune or adjust the following constants to fit your robot. Note that the non-final
+ * Tune or adjust the following constants to fit your robot. Note that the non-final
  * fields may also be edited through the dashboard (connect to the robot's WiFi network and
  * navigate to https://192.168.49.1:8080/dash). Make sure to save the values here after you
  * adjust them in the dashboard; **config variable changes don't persist between app restarts**.
@@ -26,6 +26,7 @@ public class DriveConstants {
      * discrepancies. Additional motor types can be defined via an interface with the
      * @DeviceProperties and @MotorType annotations.
      */
+    //TODO: set motor type
     private static final MotorConfigurationType MOTOR_CONFIG =
             MotorConfigurationType.getMotorType(NeveRest20Gearmotor.class);
 
@@ -33,7 +34,7 @@ public class DriveConstants {
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
-    public static final boolean RUN_USING_ENCODER = true;
+    public static final boolean RUN_USING_ENCODER = false;
     public static final PIDCoefficients MOTOR_VELO_PID = null;
 
     /*
@@ -44,9 +45,10 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    public static double WHEEL_RADIUS = 2;
+    //TODO: set the wheel constants
+    public static double WHEEL_RADIUS = 2;//CM
     public static double GEAR_RATIO = 1; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 1;
+    public static double TRACK_WIDTH = 1;//CM
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -54,6 +56,7 @@ public class DriveConstants {
      * motor encoders or have elected not to use them for velocity control, these values should be
      * empirically tuned.
      */
+    //TODO: set the feed forword values
     public static double kV = 1.0 / rpmToVelocity(getMaxRpm());
     public static double kA = 0;
     public static double kStatic = 0;
@@ -72,7 +75,7 @@ public class DriveConstants {
     );
 
 
-    public static double encoderTicksToInches(double ticks) {
+    public static double encoderTicksToCM(double ticks) {
         return WHEEL_RADIUS * 2 * Math.PI * GEAR_RATIO * ticks / MOTOR_CONFIG.getTicksPerRev();
     }
 

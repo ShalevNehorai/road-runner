@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-import com.qualcomm.robotcore.hardware.configuration.LynxConstants;
 import org.firstinspires.ftc.teamcode.util.LynxModuleUtil;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToCM;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
 
 /*
@@ -89,7 +88,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
     public List<Double> getWheelPositions() {
         List<Double> wheelPositions = new ArrayList<>();
         for (DcMotorEx motor : motors) {
-            wheelPositions.add(encoderTicksToInches(motor.getCurrentPosition()));
+            wheelPositions.add(encoderTicksToCM(motor.getCurrentPosition()));
         }
         return wheelPositions;
     }
@@ -98,7 +97,7 @@ public class SampleMecanumDriveREV extends SampleMecanumDriveBase {
     public List<Double> getWheelVelocities() {
         List<Double> wheelVelocities = new ArrayList<>();
         for (DcMotorEx motor : motors) {
-            wheelVelocities.add(encoderTicksToInches(motor.getVelocity()));
+            wheelVelocities.add(encoderTicksToCM(motor.getVelocity()));
         }
         return wheelVelocities;
     }

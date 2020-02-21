@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.drive.mecanum;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToCM;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
 
 import android.support.annotation.NonNull;
@@ -98,7 +98,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
 
         List<Double> wheelPositions = new ArrayList<>();
         for (ExpansionHubMotor motor : motors) {
-            wheelPositions.add(encoderTicksToInches(bulkData.getMotorCurrentPosition(motor)));
+            wheelPositions.add(encoderTicksToCM(bulkData.getMotorCurrentPosition(motor)));
         }
         return wheelPositions;
     }
@@ -113,7 +113,7 @@ public class SampleMecanumDriveREVOptimized extends SampleMecanumDriveBase {
 
         List<Double> wheelVelocities = new ArrayList<>();
         for (ExpansionHubMotor motor : motors) {
-            wheelVelocities.add(encoderTicksToInches(bulkData.getMotorVelocity(motor)));
+            wheelVelocities.add(encoderTicksToCM(bulkData.getMotorVelocity(motor)));
         }
         return wheelVelocities;
     }

@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.drive.tank;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToCM;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.getMotorVelocityF;
 
 import android.support.annotation.NonNull;
@@ -100,10 +100,10 @@ public class SampleTankDriveREVOptimized extends SampleTankDriveBase {
         }
 
         for (DcMotorEx leftMotor : leftMotors) {
-            leftSum += encoderTicksToInches(bulkData.getMotorCurrentPosition(leftMotor));
+            leftSum += encoderTicksToCM(bulkData.getMotorCurrentPosition(leftMotor));
         }
         for (DcMotorEx rightMotor : rightMotors) {
-            rightSum += encoderTicksToInches(bulkData.getMotorCurrentPosition(rightMotor));
+            rightSum += encoderTicksToCM(bulkData.getMotorCurrentPosition(rightMotor));
         }
         return Arrays.asList(leftSum / leftMotors.size(), rightSum / rightMotors.size());
     }
@@ -118,10 +118,10 @@ public class SampleTankDriveREVOptimized extends SampleTankDriveBase {
         }
 
         for (DcMotorEx leftMotor : leftMotors) {
-            leftSum += encoderTicksToInches(bulkData.getMotorVelocity(leftMotor));
+            leftSum += encoderTicksToCM(bulkData.getMotorVelocity(leftMotor));
         }
         for (DcMotorEx rightMotor : rightMotors) {
-            rightSum += encoderTicksToInches(bulkData.getMotorVelocity(rightMotor));
+            rightSum += encoderTicksToCM(bulkData.getMotorVelocity(rightMotor));
         }
         return Arrays.asList(leftSum / leftMotors.size(), rightSum / rightMotors.size());
     }

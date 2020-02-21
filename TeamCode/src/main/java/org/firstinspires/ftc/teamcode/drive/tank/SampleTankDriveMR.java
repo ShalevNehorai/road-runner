@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToCM;
 /*
  * Simple tank drive hardware implementation for Modern Robotics hardware.
  */
@@ -95,10 +95,10 @@ public class SampleTankDriveMR extends SampleTankDriveBase {
     public List<Double> getWheelPositions() {
         double leftSum = 0, rightSum = 0;
         for (DcMotor leftMotor : leftMotors) {
-            leftSum += encoderTicksToInches(leftMotor.getCurrentPosition());
+            leftSum += encoderTicksToCM(leftMotor.getCurrentPosition());
         }
         for (DcMotor rightMotor : rightMotors) {
-            rightSum += encoderTicksToInches(rightMotor.getCurrentPosition());
+            rightSum += encoderTicksToCM(rightMotor.getCurrentPosition());
         }
         return Arrays.asList(leftSum / leftMotors.size(), rightSum / rightMotors.size());
     }

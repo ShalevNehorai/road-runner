@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.control.PIDCoefficients;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.DifferentialControlLoopCoefficients;
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.MOTOR_VELO_PID;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.RUN_USING_ENCODER;
-import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToInches;
+import static org.firstinspires.ftc.teamcode.drive.DriveConstants.encoderTicksToCM;
 
 /*
  * Simple mecanum drive hardware implementation for Modern Robotics hardware.
@@ -38,7 +39,6 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
     public SampleMecanumDriveMR(HardwareMap hardwareMap) {
         super();
 
-        // TODO: adjust the names of the following hardware devices to match your configuration
         imu = hardwareMap.get(BNO055IMU.class, "imu");
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -48,6 +48,7 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
+        //TODO change motors name in the configuration
         leftFront = hardwareMap.dcMotor.get("leftFront");
         leftRear = hardwareMap.dcMotor.get("leftRear");
         rightRear = hardwareMap.dcMotor.get("rightRear");
@@ -56,9 +57,7 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
         motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
 
         for (DcMotor motor : motors) {
-            if (RUN_USING_ENCODER) {
-                motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            }
+            motor.setMode(RUN_USING_ENCODER ? DcMotor.RunMode.RUN_USING_ENCODER : DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             motor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         }
 
@@ -67,6 +66,10 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
         }
 
         // TODO: reverse any motors using DcMotor.setDirection()
+        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
+        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
+        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -94,7 +97,7 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
     public List<Double> getWheelPositions() {
         List<Double> wheelPositions = new ArrayList<>();
         for (DcMotor motor : motors) {
-            wheelPositions.add(encoderTicksToInches(motor.getCurrentPosition()));
+            wheelPositions.add(encoderTicksToCM(motor.getCurrentPosition()));
         }
         return wheelPositions;
     }
