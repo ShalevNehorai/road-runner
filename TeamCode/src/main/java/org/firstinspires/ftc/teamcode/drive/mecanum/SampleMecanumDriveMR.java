@@ -32,7 +32,7 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
      */
     private static final int MOTOR_WRITE_DELAY = 20;
 
-    private DcMotor leftFront, leftRear, rightRear, rightFront;
+    private DcMotor frontLeftDrive, backLeftDrive, backRightDrive, frontRightDrive;
     private List<DcMotor> motors;
     private BNO055IMU imu;
 
@@ -48,13 +48,12 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
         // upward (normal to the floor) using a command like the following:
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
-        //TODO change motors name in the configuration
-        leftFront = hardwareMap.dcMotor.get("leftFront");
-        leftRear = hardwareMap.dcMotor.get("leftRear");
-        rightRear = hardwareMap.dcMotor.get("rightRear");
-        rightFront = hardwareMap.dcMotor.get("rightFront");
+        frontLeftDrive = hardwareMap.dcMotor.get("frontLeftDrive");
+        backLeftDrive = hardwareMap.dcMotor.get("backLeftDrive");
+        frontRightDrive = hardwareMap.dcMotor.get("frontRightDrive");
+        backRightDrive = hardwareMap.dcMotor.get("backRightDrive");
 
-        motors = Arrays.asList(leftFront, leftRear, rightRear, rightFront);
+        motors = Arrays.asList(frontLeftDrive, backLeftDrive, backRightDrive, frontRightDrive);
 
         for (DcMotor motor : motors) {
             motor.setMode(RUN_USING_ENCODER ? DcMotor.RunMode.RUN_USING_ENCODER : DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -65,11 +64,10 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
             setPIDCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, MOTOR_VELO_PID);
         }
 
-        // TODO: reverse any motors using DcMotor.setDirection()
-        leftFront.setDirection(DcMotorSimple.Direction.FORWARD);
-        leftRear.setDirection(DcMotorSimple.Direction.FORWARD);
-        rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
-        rightRear.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontLeftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        frontRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
+        backRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // TODO: if desired, use setLocalizer() to change the localization method
         // for instance, setLocalizer(new ThreeTrackingWheelLocalizer(...));
@@ -77,8 +75,8 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
 
     @Override
     public PIDCoefficients getPIDCoefficients(DcMotor.RunMode runMode) {
-        ModernRoboticsUsbDcMotorController controller = (ModernRoboticsUsbDcMotorController) leftFront.getController();
-        DifferentialControlLoopCoefficients coefficients = controller.getDifferentialControlLoopCoefficients(leftFront.getPortNumber());
+        ModernRoboticsUsbDcMotorController controller = (ModernRoboticsUsbDcMotorController) frontLeftDrive.getController();
+        DifferentialControlLoopCoefficients coefficients = controller.getDifferentialControlLoopCoefficients(frontLeftDrive.getPortNumber());
         return new PIDCoefficients(coefficients.p, coefficients.i, coefficients.d);
     }
 
@@ -104,10 +102,10 @@ public class SampleMecanumDriveMR extends SampleMecanumDriveBase {
 
     @Override
     public void setMotorPowers(double v, double v1, double v2, double v3) {
-        leftFront.setPower(v);
-        leftRear.setPower(v1);
-        rightRear.setPower(v2);
-        rightFront.setPower(v3);
+        frontLeftDrive.setPower(v);
+        backLeftDrive.setPower(v1);
+        backRightDrive.setPower(v2);
+        frontRightDrive.setPower(v3);
 
         try {
             Thread.sleep(MOTOR_WRITE_DELAY);
