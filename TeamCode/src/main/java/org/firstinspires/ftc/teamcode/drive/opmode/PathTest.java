@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.drive.opmode;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
+import com.acmerobotics.roadrunner.path.heading.ConstantInterpolator;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
@@ -24,15 +25,16 @@ public class PathTest extends LinearOpMode {
 
         drive.followTrajectorySync(
                 drive.trajectoryBuilder()
-                        .splineTo(new Pose2d(70,30, Math.toRadians(-30)))
+                        .splineTo(new Pose2d(70,30, Math.toRadians(-30)), new ConstantInterpolator(-30))
                         .forward(20)
-                        .back(20)
                         .build()
         );
         //drive.turnSync(Math.toRadians(-100));
+        sleep(500);
         drive.followTrajectorySync(
                 drive.trajectoryBuilder()
-                .splineTo(new Pose2d(70, 150, Math.toRadians(180)))
+                .back(20)
+                .splineTo(new Pose2d(70, 150, Math.toRadians(180)), new ConstantInterpolator(Math.toRadians(180)))
                 .build()
         );
     }
