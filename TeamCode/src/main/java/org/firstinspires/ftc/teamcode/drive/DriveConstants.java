@@ -35,7 +35,6 @@ public class DriveConstants {
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
     public static final boolean RUN_USING_ENCODER = true;
-    //TODO: tune the velo pid
     public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(20, 0,0);
 
     /*
@@ -46,10 +45,9 @@ public class DriveConstants {
      * angular distances although most angular parameters are wrapped in Math.toRadians() for
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
-    //TODO: set the wheel constants
     public static double WHEEL_RADIUS = 5.08;//CM
     public static double GEAR_RATIO = 4; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 47.94;//
+    public static double TRACK_WIDTH = 47.94;//by the track width tuner
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using

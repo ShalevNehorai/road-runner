@@ -25,17 +25,18 @@ public class PathTest extends LinearOpMode {
 
         drive.followTrajectorySync(
                 drive.trajectoryBuilder()
-                        .splineTo(new Pose2d(70,30, Math.toRadians(-30)), new ConstantInterpolator(-30))
-                        .forward(20)
+                        .splineTo(new Pose2d(30, 50, Math.toRadians(-10)), new ConstantInterpolator(Math.toRadians(-10)))
+                        .splineTo(new Pose2d(60, 40, Math.toRadians(-70)), new ConstantInterpolator(Math.toRadians(-70)))
                         .build()
         );
-        //drive.turnSync(Math.toRadians(-100));
-        sleep(500);
+
         drive.followTrajectorySync(
                 drive.trajectoryBuilder()
-                .back(20)
-                .splineTo(new Pose2d(70, 150, Math.toRadians(180)), new ConstantInterpolator(Math.toRadians(180)))
+                .reverse()
+                .lineTo(new Vector2d(60, 100))
+                .splineTo(new Pose2d(60, 150, Math.toRadians(180)))
                 .build()
         );
+
     }
 }

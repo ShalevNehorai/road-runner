@@ -38,7 +38,7 @@ import java.util.List;
 @Config
 public abstract class SampleMecanumDriveBase extends MecanumDrive {
     public static PIDCoefficients TRANSLATIONAL_PID = new PIDCoefficients(0, 0, 0);
-    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0, 0, 0);
+    public static PIDCoefficients HEADING_PID = new PIDCoefficients(0.11, 0.35, 0.05);
 
 
     public enum Mode {
@@ -84,7 +84,7 @@ public abstract class SampleMecanumDriveBase extends MecanumDrive {
     }
 
     public void turn(double angle) {
-        double heading = getExternalHeading();//getPoseEstimate().getHeading();
+        double heading = getPoseEstimate().getHeading();
         turnProfile = MotionProfileGenerator.generateSimpleMotionProfile(
                 new MotionState(heading, 0, 0, 0),
                 new MotionState(heading + angle, 0, 0, 0),
