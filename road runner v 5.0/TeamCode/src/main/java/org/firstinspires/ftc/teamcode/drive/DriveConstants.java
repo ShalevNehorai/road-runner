@@ -23,16 +23,16 @@ public class DriveConstants {
     /*
      * These are motor constants that should be listed online for your motors.
      */
-    //TODO: my motor is gobilda 5202 something, see here https://www.gobilda.com/5202-series-yellow-jacket-planetary-gear-motors/
-    public static final double TICKS_PER_REV = 1;
-    public static final double MAX_RPM = 1;
+    // the motor is gobilda 5202 435 rpm, https://www.gobilda.com/5202-series-yellow-jacket-planetary-gear-motor-13-7-1-ratio-435-rpm-3-3-5v-encoder/
+    public static final double TICKS_PER_REV = 383.6;
+    public static final double MAX_RPM = 435;
 
     /*
      * Set the first flag appropriately. If using the built-in motor velocity PID, update
      * MOTOR_VELO_PID with the tuned coefficients from DriveVelocityPIDTuner.
      */
     public static final boolean RUN_USING_ENCODER = true;
-    public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(20, 0,0);
+    public static final PIDCoefficients MOTOR_VELO_PID = new PIDCoefficients(22, 1,0);
 
     /*
      * These are physical constants that can be determined from your robot (including the track
@@ -43,8 +43,8 @@ public class DriveConstants {
      * convenience. Make sure to exclude any gear ratio included in MOTOR_CONFIG from GEAR_RATIO.
      */
     public static double WHEEL_RADIUS = 5.08; //CM
-    public static double GEAR_RATIO = 4; // output (wheel) speed / input (motor) speed
-    public static double TRACK_WIDTH = 47.94; //using the track tuner
+    public static double GEAR_RATIO = 0.45; // output (wheel) speed / input (motor) speed
+    public static double TRACK_WIDTH = 37.96; //using the track tuner
 
     /*
      * These are the feedforward parameters used to model the drive motor behavior. If you are using
@@ -66,8 +66,8 @@ public class DriveConstants {
      */
     //TODO: change velocity later
     public static DriveConstraints BASE_CONSTRAINTS = new DriveConstraints(
-            30.0, 30.0, 0.0,
-            Math.toRadians(180.0), Math.toRadians(180.0), 0.0
+            70.0, 70.0, 0.0,
+            Math.toRadians(90.0), Math.toRadians(90.0), 0.0
     );
 
 

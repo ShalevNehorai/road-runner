@@ -115,9 +115,9 @@ public class SampleMecanumDrive extends MecanumDrive {
         // BNO055IMUUtil.remapAxes(imu, AxesOrder.XYZ, AxesSigns.NPN);
 
         frontLeftDrive = hardwareMap.get(DcMotorEx.class, "frontLeftDrive");
-        backRightDrive = hardwareMap.get(DcMotorEx.class, "backLeftDrive");
+        backRightDrive = hardwareMap.get(DcMotorEx.class, "backRightDrive");
         frontRightDrive = hardwareMap.get(DcMotorEx.class, "frontRightDrive");
-        backLeftDrive = hardwareMap.get(DcMotorEx.class, "backRightDrive");
+        backLeftDrive = hardwareMap.get(DcMotorEx.class, "backLeftDrive");
 
         motors = Arrays.asList(frontLeftDrive, backLeftDrive, backRightDrive, frontRightDrive);
 
@@ -137,8 +137,8 @@ public class SampleMecanumDrive extends MecanumDrive {
 
         frontLeftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
-        backRightDrive.setDirection(DcMotorSimple.Direction.FORWARD);
-        backLeftDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        backRightDrive.setDirection(DcMotorSimple.Direction.REVERSE);
+        backLeftDrive.setDirection(DcMotorSimple.Direction.FORWARD);
 
 
         // if desired, use setLocalizer() to change the localization method

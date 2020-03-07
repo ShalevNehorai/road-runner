@@ -21,16 +21,20 @@ public class PathTest extends LinearOpMode {
         if (isStopRequested()) return;
 
         drive.followTrajectory(
-                drive.trajectoryBuilder(new Pose2d())
-                        .splineTo(new Pose2d(30, 50, Math.toRadians(-10)))
-                        .splineTo(new Pose2d(60, 40, Math.toRadians(-70)))
+            drive.trajectoryBuilder(new Pose2d())
+            .splineToLinearHeading(new Pose2d(70,60), Math.toRadians(-50))
+            .build()
+        );
+
+        drive.followTrajectory(
+                drive.trajectoryBuilder(drive.getPoseEstimate())
+                .lineToLinearHeading(new Vector2d(60, 70), Math.toRadians(-90))
                 .build()
         );
 
         drive.followTrajectory(
                 drive.trajectoryBuilder(drive.getPoseEstimate(), true)
-                .lineTo(new Vector2d(60, 100))
-                .splineTo(new Pose2d(60, 150, Math.toRadians(180)))
+                .splineToLinearHeading(new Pose2d(80, 170), Math.toRadians(-90))
                 .build()
         );
 
